@@ -58,7 +58,8 @@ class PredictiveText:
 		else:
 			pass
 
-boble = PredictiveText(cleanlines('bible.txt'))
-#print(boble.generate('s'))
+if __name__ == '__main__':
+	boble = PredictiveText(cleanlines('bible.txt'))
+	boble.generate('s')
 
 
