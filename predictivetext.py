@@ -2,15 +2,6 @@ from collections import Counter
 import numpy as np
 import re
 
-def cleanlines(filename):
-	u = open(filename).read().splitlines()
-	li = [re.findall(r"\S+", K)[2:] for K in u]
-	for L in li:
-		if re.fullmatch(r'\d+:\d+', L[0]):
-			L.pop(0)
-	return ' '.join([K for L in li for K in L])
-
-
 class PredictiveText:
 	def __init__(self, script):
 		self.script = script
@@ -59,6 +50,14 @@ class PredictiveText:
 			pass
 
 if __name__ == '__main__':
+	def cleanlines(filename):
+		u = open(filename).read().splitlines()
+		li = [re.findall(r"\S+", K)[2:] for K in u]
+		for L in li:
+			if re.fullmatch(r'\d+:\d+', L[0]):
+				L.pop(0)
+		return ' '.join([K for L in li for K in L])
+	
 	boble = PredictiveText(cleanlines('bible.txt'))
 	boble.generate('s')
 
