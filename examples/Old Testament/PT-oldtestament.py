@@ -12,5 +12,5 @@ def cleanlines(filename):
 			L.pop(0)
 	return ' '.join([K for L in li for K in L])
 
-boble = PredictiveText(cleanlines('bible.txt'), m='S')
+boble = PredictiveText(cleanlines('oldtestament.txt'), m='S')
 print('\n'.join([boble.generate('S') for i in range(10)]))
