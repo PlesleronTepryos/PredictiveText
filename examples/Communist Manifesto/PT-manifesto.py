@@ -1,6 +1,5 @@
 from predictivetext import PredictiveText
 import re
 
-script = ' '.join(re.findall(r'\S+', open('manifesto.txt').read()))
-manif = PredictiveText(script, m='S')
-print('\n'.join([manif.generate('S') for i in range(10)]))
+manif = PredictiveText(' '.join(re.findall(r'\S+', open('manifesto.txt').read())), m='S')
+print(manif.generate(1000))

@@ -1,6 +1,5 @@
 from predictivetext import PredictiveText
 import re
 
-script = ' '.join(re.findall(r'\S+', open('dragonheart.txt').read()))
-dragon = PredictiveText(script, m='S')
-print('\n'.join([dragon.generate('S') for i in range(10)]))
+dragn = PredictiveText(' '.join(re.findall(r'\S+', open('dragonheart.txt').read())), m='S')
+print(dragn.generate(1000))

@@ -1,6 +1,5 @@
 from predictivetext import PredictiveText
 import re
 
-script = ' '.join(re.findall(r'\S+', open('montecristo.txt').read()))
-monte = PredictiveText(script, m='S')
-print('\n'.join([monte.generate('S') for i in range(10)]))
+monte = PredictiveText(' '.join(re.findall(r'\S+', open('montecristo.txt').read())), m='S')
+print(monte.generate(1000))
