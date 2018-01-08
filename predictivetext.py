@@ -63,32 +63,6 @@ class PredictiveText:
                 self.W_follows[0][k] = [H[0] for H in fw[k]]
                 self.W_follows[1][k] = [H[1] for H in fw[k]]
 
-
-
-            '''
-            b = re.findall(r"(?<=\W)\w", self.script)
-            bc = Counter(b)
-            bw = [[J, bc[J] / len(b)] for J in bc.keys()]
-            self.W_begins = [[H[0] for H in bw], [G[1] for G in bw]]
-        
-            g = re.findall(r'\w+', self.script)
-            
-            q = list(set([G[0] for G in f]))
-            pw = dict([[H, []] for H in q])
-            for k in f:
-                pw[k[0]].append(k[1])
-            fc = {}
-            for k in pw.keys():
-                fc[k] = Counter(pw[k])
-            fw = {}
-            for k in fc.keys():
-                fw[k] = [[j, fc[k][j] / len(pw[k])] for j in fc[k].keys()]
-            self.W_follows = [{}, {}]
-            for k in fw.keys():
-                self.W_follows[0][k] = [H[0] for H in fw[k]]
-                self.W_follows[1][k] = [H[1] for H in fw[k]]
-            '''
-
         else:
             raise PredictiveTextError("'{}' is not a valid mode.".format(m))
         if not silent:
