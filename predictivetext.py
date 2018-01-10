@@ -40,7 +40,7 @@ class PredictiveText:
                 self.S_follows[1][k] = [H[1] for H in fw[k]]
 
         elif self.m == 'W':
-            b = [''.join(k) for k in re.findall(r'(?<=\W)([^aeiouyAEIOUY\W])?([aeiouyAEIOUY])([^aeiouyAEIOUY\W])?', self.script)]
+            b = [''.join(k) for k in re.findall(r'(?<=\W)([^aeiouyAEIOUY\W])+?([aeiouyAEIOUY])([^aeiouyAEIOUY\W])?', self.script)]
             bc = Counter(b)
             bw = [[J, bc[J] / len(b)] for J in bc.keys()]
             self.W_begins = [[H[0] for H in bw], [G[1] for G in bw]]
@@ -68,7 +68,8 @@ class PredictiveText:
         if not silent:
             print("Finished: {}".format(self.title))
 
-    def generate(self, n=1, s=None):
+    def generate(self, n=1, s=None, k=4):
+        k = 1.56487/(k-1)**1.1695
         if isinstance(s, int):
             np.random.seed(s)
         o = ''
@@ -87,14 +88,13 @@ class PredictiveText:
                     o += ' ' + s
 
             elif self.m == 'W':
-                # Word generation is still kinda broken. But at least they're pronounceable! Sort of...
                 w = [np.random.choice(a=self.W_begins[0], p=self.W_begins[1])]
                 while isinstance(w, list):
                     last = w[-1]
                     if last in self.W_follows[0].keys():
                         w.append(np.random.choice(a=self.W_follows[
                                  0][last], p=self.W_follows[1][last]))
-                    if np.random.rand() < len(w) ** 2 / 10:
+                    if np.random.rand() < (k*len(w))**2/(k*len(w)+1)**2:
                         w = ''.join(w)
                 else:
                     o += ' ' + w
